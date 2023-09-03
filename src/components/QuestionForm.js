@@ -1,92 +1,42 @@
-import React, { useState } from "react";
+// QuestionForm.js
+import React from 'react';
 
-function QuestionForm(props) {
-  const [formData, setFormData] = useState({
-    prompt: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-    answer4: "",
-    correctIndex: 0,
-  });
-
-  function handleChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(formData);
-  }
-
+function QuestionForm({ formData, onFormChange, onFormSubmit }) {
   return (
-    <section>
-      <h1>New Question</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Prompt:
-          <input
-            type="text"
-            name="prompt"
-            value={formData.prompt}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Answer 1:
-          <input
-            type="text"
-            name="answer1"
-            value={formData.answer1}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Answer 2:
-          <input
-            type="text"
-            name="answer2"
-            value={formData.answer2}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Answer 3:
-          <input
-            type="text"
-            name="answer3"
-            value={formData.answer3}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Answer 4:
-          <input
-            type="text"
-            name="answer4"
-            value={formData.answer4}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Correct Answer:
-          <select
-            name="correctIndex"
-            value={formData.correctIndex}
-            onChange={handleChange}
-          >
-            <option value="0">{formData.answer1}</option>
-            <option value="1">{formData.answer2}</option>
-            <option value="2">{formData.answer3}</option>
-            <option value="3">{formData.answer4}</option>
-          </select>
-        </label>
-        <button type="submit">Add Question</button>
-      </form>
-    </section>
+    <form onSubmit={onFormSubmit}>
+      <h2>New Question</h2>
+      <div>
+        <label htmlFor="prompt">Prompt</label>
+        <input
+          type="text"
+          id="prompt"
+          name="prompt"
+          value={formData.prompt}
+          onChange={onFormChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="answers">Answers</label>
+        <input
+          type="text"
+          id="answers"
+          name="answers"
+          value={formData.answers}
+          onChange={onFormChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="correctIndex">Correct Index</label>
+        <input
+          type="number"
+          id="correctIndex"
+          name="correctIndex"
+          value={formData.correctIndex}
+          onChange={onFormChange}
+        />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 }
 
